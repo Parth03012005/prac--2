@@ -1,53 +1,20 @@
-import { useState } from 'react';
-import './App.css';
-import Child from './components/Child';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contect from "./pages/Contect";
 
-function App() {
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [location, setLocation] = useState('');
-  const [bio, setBio] = useState('');
-  const [submittedData, setSubmittedData] = useState(null);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const myData = { name, age, location, bio };
-    setSubmittedData(myData); 
-  };
-
+const App = () => {
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Enter Your Name.."
-        />
-        <input
-          type="text"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-          placeholder="Enter Your Age.."
-        />
-        <input
-          type="text"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          placeholder="Enter Your Location.."
-        />
-        <input
-          type="text"
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-          placeholder="Enter Your Bio.."
-        />
-        <button type="submit">Submit</button>
-      </form>
-
-      {submittedData && <Child myData={submittedData} />}
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contect />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
